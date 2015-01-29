@@ -1,15 +1,37 @@
-body {
-	background-color: black;
+body 
+{
+	background-color: gray;
 	text-align: center;
 }
-.header {
+.header 
+{
 	color: white;
 	font-size: 30px;
 	font-family: Impact;
 }
+p 
+{
 
-p {
-
-	color: gray;
+	color: blue;
 	font-size: 60px;
+}
+.cold
+{
+	background-color: #95A5A6
+}
+.chilly
+{
+	background-color: #1ABC9C
+}
+.nice
+{
+	background-color: #2980B9
+}
+.warm
+{
+	background-color: #E67E22
+}
+.hot
+{
+	background-color: #E74C3C
 }
