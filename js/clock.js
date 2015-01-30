@@ -1,3 +1,7 @@
+getTime();
+getTemp();
+getCoords();
+
 function getTime() 
 {
 	var curTime = document.getElementById("clock");
@@ -5,14 +9,14 @@ function getTime()
 	setTimeout(getTime, 1000);
 }
 
-getTime();
+
 
 function getTemp() 
 {
-	$.getJSON("https://api.forecast.io/forecast/7837f416ef960406bf88e82aa9861d88/35.300399,-120.662362?callback=?", dailySummary);
+	$.getJSON("https://api.forecast.io/forecast/7837f416ef960406bf88e82aa9861d88/35.300399,-120.662362?callback=?", displayTemp);
 }
 
-function dailySummary(data)
+function displayTemp(data)
 {
 	console.log(data);
 	$("#forecastLabel").html(data.daily.summary);
@@ -53,5 +57,50 @@ function dailySummary(data)
 	}
 }
 
+function getCoords() 
+{
+    if (navigator.geolocation) 
+    {
+        navigator.geolocation.getCurrentPosition(getPosition, showError);
+    } 
+    else 
+    {	
+        $("#locationLabel").html("Geolocation is not supported by this browser.");
+    }
+}
 
-getTemp();
+function getPosition(data)
+{
+	
+	$.getJSON("http://maps.googleapis.com/maps/api/geocode/json?latlng=" + data.coords.latitude 
+		+"," + data.coords.longitude + "&sensor=true", displayCity);
+
+}
+
+function showError(error) {
+    switch(error.code) {
+        case error.PERMISSION_DENIED:
+            $("#locationLabel").html("User denied the request for Geolocation.");
+            break;
+        case error.POSITION_UNAVAILABLE:
+            $("#locationLabel").html("Location information is unavailable.");
+            break;
+        case error.TIMEOUT:
+            $("#locationLabel").html("The request to get user location timed out.");
+            break;
+        case error.UNKNOWN_ERROR:
+            $("#locationLabel").html("An unknown error occurred.");
+            break;
+    }
+}
+
+function displayCity(data)
+{
+	console.log(data);
+	$("#locationLabel").html(data.results[0].address_components[2].long_name);
+}
+
+
+
+
+

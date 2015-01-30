@@ -1,19 +1,25 @@
 body 
 {
-	background-color: gray;
+	background-color: white;
 	text-align: center;
 }
 .header 
 {
-	color: white;
+	color: 	black;
 	font-size: 30px;
 	font-family: Impact;
 }
 p 
 {
 
-	color: blue;
+	color: black;
 	font-size: 60px;
+}
+
+#clock 
+{
+	background-color: 	#DBDBDB;
+	border: 1px solid black;
 }
 .cold
 {
