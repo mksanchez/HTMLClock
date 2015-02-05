@@ -100,7 +100,39 @@ function displayCity(data)
 	$("#locationLabel").html(data.results[0].address_components[2].long_name);
 }
 
+function showAlarmPopup()
+{
+	$("#mask").removeClass("hide");
+	$("#popup").removeClass("hide");
 
+}
 
+function hideAlarmPopup()
+{
+	$("#mask").addClass("hide");
+	$("#popup").addClass("hide");
+}
 
+function insertAlarm(hours, mins, ampm, alarmName)
+{
+	var divElem = $('<div></div>');
+	divElem.addClass("flexable");
+
+	divElem.append("<div class=\"" + name + "\">" + alarmName +"</div>");
+	divElem.append("<div class=\"" + name + "\">" + hours + " : " + mins + ampm + "</div>");
+	$("#alarms").append(divElem);
+
+	console.log("check");
+}
+
+function addAlarm()
+{
+	var hours = $("#hours option:selected").text(); 
+	var mins = $("#mins option:selected").text();
+	var ampm = $("#ampm option:selected").text();
+	var alarmName = $("#alarmName").val();
+
+	insertAlarm(hours, mins, ampm, alarmName);
+	hideAlarmPopup();
+}
 
