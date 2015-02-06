@@ -1,6 +1,7 @@
 getTime();
 getTemp();
 getCoords();
+fillIn();
 var numAlarm = 0;
 
 getAllAlarms();
@@ -181,5 +182,23 @@ function deleteAlarm(num)
 			results[cName].destroy({});
 		}
 	});
+}
+
+function fillIn()
+{
+	for(var i = 1; i <= 12; i++)
+	{
+		$("#hours").append("<option>" + i + "</option>");
+	}
+
+	for(var i = 0; i <= 9; i++)
+	{
+		$("#mins").append("<option>0" + i + "</option>");
+	}
+
+	for(var i = 10; i <= 60; i++)
+	{
+		$("#mins").append("<option>" + i + "</option>");
+	}
 }
 
