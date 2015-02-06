@@ -2,7 +2,7 @@ getTime();
 getTemp();
 getCoords();
 fillIn();
-var numAlarm = 0;
+var numAlarm;
 
 getAllAlarms();
 
@@ -118,9 +118,13 @@ function hideAlarmPopup()
 	$("#popup").addClass("hide");
 }
 
-function insertAlarm(hours, mins, ampm, alarmName)
+function insertAlarm(hours, mins, ampm, alarmName, id)
 {
+	var numAlarm = id;
 	var divElem = $("<div></div>");
+
+	$(".noAlarms").addClass("hide");
+
 	divElem.addClass("flexable");
 
 	divElem.append("<div class=\"" + numAlarm + "\">" + alarmName +"</div>");
@@ -128,9 +132,7 @@ function insertAlarm(hours, mins, ampm, alarmName)
 	divElem.append("<input type=\"button\" value=\"Delete Alarm\" class = \"" + numAlarm + " button\" onclick=\"deleteAlarm(this)\"/>");
 	$("#alarms").append(divElem);
 
-	numAlarm++;
-
-	console.log("check");
+	
 }
 
 function addAlarm()
@@ -145,8 +147,10 @@ function addAlarm()
 	var AlarmObject = Parse.Object.extend("Alarm");
 	var alarmObject = new AlarmObject();
 	alarmObject.save({"hours": hours, "mins": mins, "ampm": ampm, "alarmName": alarmName}, {
-		success: hideAlarmPopup(), 
-		success: insertAlarm(hours, mins, ampm, alarmName)
+		success: function(object) {
+			hideAlarmPopup();
+			insertAlarm(hours, mins, ampm, alarmName, object.id);
+		}
 	});
 
 }
@@ -161,7 +165,7 @@ function getAllAlarms()
 	query.find({
 		success: function(results) {
 			for (var i = 0; i < results.length; i++) {
-				insertAlarm(results[i].get("hours"), results[i].get("mins"), results[i].get("ampm"), results[i].get("alarmName"));
+				insertAlarm(results[i].get("hours"), results[i].get("mins"), results[i].get("ampm"), results[i].get("alarmName"), results[i].id);
 			}
 		}
 	});
@@ -171,17 +175,18 @@ function getAllAlarms()
 function deleteAlarm(num)
 {
 	var cName = $(num).attr("class").split(" ")[0];
-	console.log(cName);
-	//console.log($(num).attr("class"));
-	$("." + cName).remove();
 
 	var AlarmObject = Parse.Object.extend("Alarm");
 	var query = new Parse.Query(AlarmObject);
-	query.find({
-		success: function(results) {
-			results[cName].destroy({});
+	query.get(cName, {
+		success: function(object) {
+			object.destroy({});
+			$("." + cName).remove();
 		}
 	});
+
+
+
 }
 
 function fillIn()
