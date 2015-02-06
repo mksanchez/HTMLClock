@@ -1,6 +1,9 @@
 getTime();
 getTemp();
 getCoords();
+var numAlarm = 0;
+
+getAllAlarms();
 
 function getTime() 
 {
@@ -109,18 +112,22 @@ function showAlarmPopup()
 
 function hideAlarmPopup()
 {
+	console.log("hide");
 	$("#mask").addClass("hide");
 	$("#popup").addClass("hide");
 }
 
 function insertAlarm(hours, mins, ampm, alarmName)
 {
-	var divElem = $('<div></div>');
+	var divElem = $("<div></div>");
 	divElem.addClass("flexable");
 
-	divElem.append("<div class=\"" + name + "\">" + alarmName +"</div>");
-	divElem.append("<div class=\"" + name + "\">" + hours + " : " + mins + ampm + "</div>");
+	divElem.append("<div class=\"" + numAlarm + "\">" + alarmName +"</div>");
+	divElem.append("<div class=\"" + numAlarm + "\">" + hours + " : " + mins + ampm + "</div>");
+	divElem.append("<input type=\"button\" value=\"Delete Alarm\" class = \"" + numAlarm + " button\" onclick=\"deleteAlarm(this)\"/>");
 	$("#alarms").append(divElem);
+
+	numAlarm++;
 
 	console.log("check");
 }
@@ -132,7 +139,47 @@ function addAlarm()
 	var ampm = $("#ampm option:selected").text();
 	var alarmName = $("#alarmName").val();
 
-	insertAlarm(hours, mins, ampm, alarmName);
-	hideAlarmPopup();
+	console.log()
+
+	var AlarmObject = Parse.Object.extend("Alarm");
+	var alarmObject = new AlarmObject();
+	alarmObject.save({"hours": hours, "mins": mins, "ampm": ampm, "alarmName": alarmName}, {
+		success: hideAlarmPopup(), 
+		success: insertAlarm(hours, mins, ampm, alarmName)
+	});
+
+}
+
+function getAllAlarms()
+{
+	console.log("hello");
+	Parse.initialize("zItPQlahSwMhPzZgDXvCGGBAhmJhC8V6Qz9esGok", "uNREjZYFNB1oECctRsbqfaAB1uwhFYOugnrOv3xN");
+
+	var AlarmObject = Parse.Object.extend("Alarm");
+	var query = new Parse.Query(AlarmObject);
+	query.find({
+		success: function(results) {
+			for (var i = 0; i < results.length; i++) {
+				insertAlarm(results[i].get("hours"), results[i].get("mins"), results[i].get("ampm"), results[i].get("alarmName"));
+			}
+		}
+	});
+
+}
+
+function deleteAlarm(num)
+{
+	var cName = $(num).attr("class").split(" ")[0];
+	console.log(cName);
+	//console.log($(num).attr("class"));
+	$("." + cName).remove();
+
+	var AlarmObject = Parse.Object.extend("Alarm");
+	var query = new Parse.Query(AlarmObject);
+	query.find({
+		success: function(results) {
+			results[cName].destroy({});
+		}
+	});
 }
 
