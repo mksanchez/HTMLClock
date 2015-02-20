@@ -80,9 +80,3 @@ function testAPI() {
   });
 }
 
-function logoutFB()
-{
-  FB.logout(function(response) {
-        console.log("logging out...");
-    });
-}
