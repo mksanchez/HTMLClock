@@ -5,7 +5,7 @@
 		<link href="css/clock.css" rel="stylesheet" type="text/css">
 		<link href = "css/alarm.css" rel ="stylesheet" type = "text/css">
 	</head>
-	<body>
+	<body onbeforeunload = "logoutFB()">
 		<?php include "php/fbconnect.php";?>
 		<h1 class="header"> Mariel's Clock</h1>
 		<p id = "clock"></p>

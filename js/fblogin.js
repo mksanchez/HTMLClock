@@ -79,3 +79,10 @@ function testAPI() {
       'Thanks for logging in, ' + response.name + '!';
   });
 }
+
+function logoutFB()
+{
+  FB.logout(function(response) {
+        // Person is now logged out
+    });
+}
