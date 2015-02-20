@@ -157,7 +157,6 @@ function addAlarm(userID)
 
 function getAllAlarms()
 {
-	console.log("hello");
 	Parse.initialize("zItPQlahSwMhPzZgDXvCGGBAhmJhC8V6Qz9esGok", "uNREjZYFNB1oECctRsbqfaAB1uwhFYOugnrOv3xN");
 
 	var AlarmObject = Parse.Object.extend("Alarm");
@@ -165,7 +164,7 @@ function getAllAlarms()
 	query.find({
 		success: function(results) {
 			for (var i = 0; i < results.length; i++) {
-				if(results[i].get("userID"))
+				//if(results[i].get("userID"))
 				insertAlarm(results[i].get("hours"), results[i].get("mins"), results[i].get("ampm"), results[i].get("alarmName"), results[i].id);
 			}
 		}
