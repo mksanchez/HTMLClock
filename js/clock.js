@@ -164,6 +164,7 @@ function getAllAlarms(userID)
 	var query = new Parse.Query(AlarmObject);
 	query.find({
 		success: function(results) {
+			console.log(results);
 			for (var i = 0; i < results.length; i++) {
 				if(results[i].get("userID") === userID)
 				{
