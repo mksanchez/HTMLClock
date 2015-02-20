@@ -164,8 +164,8 @@ function getAllAlarms(userID)
 	var query = new Parse.Query(AlarmObject);
 	query.find({
 		success: function(results) {
-			console.log(results);
 			for (var i = 0; i < results.length; i++) {
+				console.log(results[i].get("userID"));
 				if(results[i].get("userID") === userID)
 				{
 					insertAlarm(results[i].get("hours"), results[i].get("mins"), results[i].get("ampm"), results[i].get("alarmName"), results[i].id);
