@@ -9,7 +9,7 @@ function statusChangeCallback(response) {
   if (response.status === 'connected') {
     // Logged into your app and Facebook.
     testAPI();
-    getAllAlarms(response.authResponse.userID));
+    getAllAlarms(response.authResponse.userID);
     
   } else if (response.status === 'not_authorized') {
     // The person is logged into Facebook, but not your app.
