@@ -142,7 +142,7 @@ function addAlarm()
 	var ampm = $("#ampm option:selected").text();
 	var alarmName = $("#alarmName").val();
 
-	console.log("add");
+	console.log(userID);
 
 	var AlarmObject = Parse.Object.extend("Alarm");
 	var alarmObject = new AlarmObject();
@@ -165,7 +165,6 @@ function getAllAlarms(userID)
 	query.find({
 		success: function(results) {
 			for (var i = 0; i < results.length; i++) {
-				console.log(userID);
 				if(results[i].get("userID") === userID)
 				{
 					insertAlarm(results[i].get("hours"), results[i].get("mins"), results[i].get("ampm"), results[i].get("alarmName"), results[i].id);
