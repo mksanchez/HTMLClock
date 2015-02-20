@@ -120,6 +120,7 @@ function hideAlarmPopup()
 
 function insertAlarm(hours, mins, ampm, alarmName, id)
 {
+	console.log("insert");
 	var numAlarm = id;
 	var divElem = $("<div></div>");
 
