@@ -149,13 +149,13 @@ function addAlarm(userID)
 	alarmObject.save({"hours": hours, "mins": mins, "ampm": ampm, "alarmName": alarmName, "userID": userID}, {
 		success: function(object) {
 			hideAlarmPopup();
-			insertAlarm(hours, mins, ampm, alarmName, object.id, userID);
+			insertAlarm(hours, mins, ampm, alarmName, object.id);
 		}
 	});
 
 }
 
-function getAllAlarms()
+function getAllAlarms(userID)
 {
 	Parse.initialize("zItPQlahSwMhPzZgDXvCGGBAhmJhC8V6Qz9esGok", "uNREjZYFNB1oECctRsbqfaAB1uwhFYOugnrOv3xN");
 
@@ -164,8 +164,11 @@ function getAllAlarms()
 	query.find({
 		success: function(results) {
 			for (var i = 0; i < results.length; i++) {
-				//if(results[i].get("userID"))
-				insertAlarm(results[i].get("hours"), results[i].get("mins"), results[i].get("ampm"), results[i].get("alarmName"), results[i].id);
+				if(results[i].get("userID") === userID)
+				{
+					insertAlarm(results[i].get("hours"), results[i].get("mins"), results[i].get("ampm"), results[i].get("alarmName"), results[i].id);
+				}
+				
 			}
 		}
 	});
