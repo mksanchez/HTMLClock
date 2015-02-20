@@ -1,3 +1,5 @@
+var userID;
+
 // This is called with the results from from FB.getLoginStatus().
 function statusChangeCallback(response) {
   console.log('statusChangeCallback');
@@ -8,6 +10,7 @@ function statusChangeCallback(response) {
   // for FB.getLoginStatus().
   if (response.status === 'connected') {
     // Logged into your app and Facebook.
+    userID = response.authResponse.userID;
     testAPI();
     getAllAlarms(response.authResponse.userID);
     

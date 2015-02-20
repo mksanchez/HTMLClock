@@ -135,7 +135,7 @@ function insertAlarm(hours, mins, ampm, alarmName, id)
 	
 }
 
-function addAlarm(userID)
+function addAlarm()
 {
 	var hours = $("#hours option:selected").text(); 
 	var mins = $("#mins option:selected").text();
