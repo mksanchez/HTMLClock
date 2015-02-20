@@ -113,7 +113,6 @@ function showAlarmPopup()
 
 function hideAlarmPopup()
 {
-	console.log("hide");
 	$("#mask").addClass("hide");
 	$("#popup").addClass("hide");
 }
@@ -143,7 +142,7 @@ function addAlarm(userID)
 	var ampm = $("#ampm option:selected").text();
 	var alarmName = $("#alarmName").val();
 
-	console.log()
+	console.log("add");
 
 	var AlarmObject = Parse.Object.extend("Alarm");
 	var alarmObject = new AlarmObject();
@@ -158,6 +157,7 @@ function addAlarm(userID)
 
 function getAllAlarms(userID)
 {
+	console.log("get Alarms");
 	Parse.initialize("zItPQlahSwMhPzZgDXvCGGBAhmJhC8V6Qz9esGok", "uNREjZYFNB1oECctRsbqfaAB1uwhFYOugnrOv3xN");
 
 	var AlarmObject = Parse.Object.extend("Alarm");
