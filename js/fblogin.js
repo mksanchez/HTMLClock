@@ -83,6 +83,6 @@ function testAPI() {
 function logoutFB()
 {
   FB.logout(function(response) {
-        // Person is now logged out
+        console.log("logging out...");
     });
 }
