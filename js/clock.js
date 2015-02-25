@@ -158,7 +158,7 @@ function addAlarm()
 function getAllAlarms(userID)
 {
 	console.log("get Alarms");
-	Parse.initialize("zItPQlahSwMhPzZgDXvCGGBAhmJhC8V6Qz9esGok", "uNREjZYFNB1oECctRsbqfaAB1uwhFYOugnrOv3xN");
+	Parse.initialize("zItPQlahSwMhPzZgDXvCGGBAhmJhC8V6Qz9esGok", "uNREjZYFNB1oECctRsbqfaAB1uwhFYOugnrov3xN");
 
 	var AlarmObject = Parse.Object.extend("Alarm");
 	var query = new Parse.Query(AlarmObject);
