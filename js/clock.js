@@ -137,6 +137,7 @@ function insertAlarm(hours, mins, ampm, alarmName, id)
 
 function addAlarm()
 {
+	ga('send', 'event', 'Alarm', 'Add');
 	var hours = $("#hours option:selected").text(); 
 	var mins = $("#mins option:selected").text();
 	var ampm = $("#ampm option:selected").text();
@@ -178,6 +179,7 @@ function getAllAlarms(userID)
 
 function deleteAlarm(num)
 {
+	ga('send', 'event', 'Alarm', 'Delete');
 	var cName = $(num).attr("class").split(" ")[0];
 
 	var AlarmObject = Parse.Object.extend("Alarm");
