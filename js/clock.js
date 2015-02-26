@@ -4,7 +4,7 @@ getCoords();
 fillIn();
 var numAlarm;
 
-
+getAllAlarms();
 
 function getTime() 
 {
@@ -113,13 +113,13 @@ function showAlarmPopup()
 
 function hideAlarmPopup()
 {
+	console.log("hide");
 	$("#mask").addClass("hide");
 	$("#popup").addClass("hide");
 }
 
 function insertAlarm(hours, mins, ampm, alarmName, id)
 {
-	console.log("insert");
 	var numAlarm = id;
 	var divElem = $("<div></div>");
 
@@ -142,11 +142,11 @@ function addAlarm()
 	var ampm = $("#ampm option:selected").text();
 	var alarmName = $("#alarmName").val();
 
-	console.log(userID);
+	console.log()
 
 	var AlarmObject = Parse.Object.extend("Alarm");
 	var alarmObject = new AlarmObject();
-	alarmObject.save({"hours": hours, "mins": mins, "ampm": ampm, "alarmName": alarmName, "userID": userID}, {
+	alarmObject.save({"hours": hours, "mins": mins, "ampm": ampm, "alarmName": alarmName}, {
 		success: function(object) {
 			hideAlarmPopup();
 			insertAlarm(hours, mins, ampm, alarmName, object.id);
@@ -155,9 +155,9 @@ function addAlarm()
 
 }
 
-function getAllAlarms(userID)
+function getAllAlarms()
 {
-	console.log("get Alarms");
+	console.log("hello");
 	Parse.initialize("zItPQlahSwMhPzZgDXvCGGBAhmJhC8V6Qz9esGok", "uNREjZYFNB1oECctRsbqfaAB1uwhFYOugnrOv3xN");
 
 	var AlarmObject = Parse.Object.extend("Alarm");
@@ -165,11 +165,7 @@ function getAllAlarms(userID)
 	query.find({
 		success: function(results) {
 			for (var i = 0; i < results.length; i++) {
-				if(results[i].get("userID") === userID)
-				{
-					insertAlarm(results[i].get("hours"), results[i].get("mins"), results[i].get("ampm"), results[i].get("alarmName"), results[i].id);
-				}
-				
+				insertAlarm(results[i].get("hours"), results[i].get("mins"), results[i].get("ampm"), results[i].get("alarmName"), results[i].id);
 			}
 		}
 	});
