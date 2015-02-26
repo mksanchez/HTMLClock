@@ -137,7 +137,6 @@ function insertAlarm(hours, mins, ampm, alarmName, id)
 
 function addAlarm()
 {
-	//ga('send', 'event', 'Alarm', 'Add');
 	var hours = $("#hours option:selected").text(); 
 	var mins = $("#mins option:selected").text();
 	var ampm = $("#ampm option:selected").text();
@@ -159,7 +158,7 @@ function addAlarm()
 function getAllAlarms(userID)
 {
 	console.log("get Alarms");
-	Parse.initialize("zItPQlahSwMhPzZgDXvCGGBAhmJhC8V6Qz9esGok", "uNREjZYFNB1oECctRsbqfaAB1uwhFYOugnrov3xN");
+	Parse.initialize("zItPQlahSwMhPzZgDXvCGGBAhmJhC8V6Qz9esGok", "uNREjZYFNB1oECctRsbqfaAB1uwhFYOugnrOv3xN");
 
 	var AlarmObject = Parse.Object.extend("Alarm");
 	var query = new Parse.Query(AlarmObject);
@@ -179,7 +178,6 @@ function getAllAlarms(userID)
 
 function deleteAlarm(num)
 {
-	//ga('send', 'event', 'Alarm', 'Delete');
 	var cName = $(num).attr("class").split(" ")[0];
 
 	var AlarmObject = Parse.Object.extend("Alarm");
@@ -212,6 +210,3 @@ function fillIn()
 		$("#mins").append("<option>" + i + "</option>");
 	}
 }
-
-
-
