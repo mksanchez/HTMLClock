@@ -153,6 +153,8 @@ function addAlarm()
 		}
 	});
 
+	ga('send', 'event', 'Alarm', 'Add');
+
 }
 
 function getAllAlarms(userID)
@@ -189,7 +191,7 @@ function deleteAlarm(num)
 		}
 	});
 
-
+	ga('send', 'event', 'Alarm', 'Delete');
 
 }
 
