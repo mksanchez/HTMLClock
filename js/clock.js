@@ -142,8 +142,6 @@ function addAlarm()
 	var ampm = $("#ampm option:selected").text();
 	var alarmName = $("#alarmName").val();
 
-	console.log()
-
 	var AlarmObject = Parse.Object.extend("Alarm");
 	var alarmObject = new AlarmObject();
 	alarmObject.save({"hours": hours, "mins": mins, "ampm": ampm, "alarmName": alarmName}, {
